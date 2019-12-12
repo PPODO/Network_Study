@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+#folder
+.vs/
+out/
+
+#file
+*.json
