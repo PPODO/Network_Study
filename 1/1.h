@@ -8,4 +8,6 @@
 #else if
 #include <sys/socket.h> // for socket
 #include <netinet/ip.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 #endif
