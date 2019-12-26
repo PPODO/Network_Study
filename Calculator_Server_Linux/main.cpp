@@ -31,7 +31,7 @@ int main() {
     sockaddr_in BindAddress;
     memset(&BindAddress, 0x00, sizeof(sockaddr_in));
     BindAddress.sin_family = AF_INET;
-    BindAddress.sin_addr.s_addr = inet_addr(INADDR_ANY);
+    BindAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
     BindAddress.sin_port = htons(3550);
     if(bind(ListenSocket, reinterpret_cast<sockaddr*>(&BindAddress), sizeof(sockaddr_in)) == -1) {
         std::cout << "Failed To Bind Socket!\n";
@@ -61,7 +61,7 @@ int main() {
             close(ClientSocket);
             continue;
         }
-
+    
         auto LValue = ntohl(RecvData->m_LValue);
         auto RValue = ntohl(RecvData->m_RValue);
         CALCULATE_DATA SendData;

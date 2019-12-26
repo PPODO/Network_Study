@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     sockaddr_in ConnectAddress;
     memset(&ConnectAddress, 0x00, sizeof(sockaddr_in));
     ConnectAddress.sin_family = AF_INET;
-    ConnectAddress.sin_addr.s_addr = inet_addr(INADDR_ANY);
+    ConnectAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
     ConnectAddress.sin_port = htons(3550);
     if(connect(ConnectSocket, reinterpret_cast<sockaddr*>(&ConnectAddress), sizeof(sockaddr_in)) == -1) {
         std::cout << "Failed Connect To Server!\n";
