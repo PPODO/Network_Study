@@ -15,7 +15,7 @@ int main() {
         std::cout << "I'm Child Process : " << getpid() << std::endl;
 
         int i = 0;
-        while(true) {
+        while(i < 100) {
             std::cout << "Child : " << i << std::endl;
             i += 1;
             sleep(1);
@@ -25,7 +25,7 @@ int main() {
         std::cout << "I'm Parent Process : " << getpid() << std::endl;
 
         int i = 0;
-        while(true) {
+        while(i < 200) {
             std::cout << "Parent : " << i << std::endl;
             i += 2;
             sleep(1);
