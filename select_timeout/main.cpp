@@ -14,9 +14,8 @@ int main() {
     FD_ZERO(&ReadFDS);
     FD_SET(STDIN, &ReadFDS);
 
-
     while(true) {
-    timeval Timeout;
+        timeval Timeout;
         Timeout.tv_sec = 5;
         Timeout.tv_usec = 0;
         std::cout << "> ";
