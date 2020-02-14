@@ -39,12 +39,12 @@ void* Thread_Function(void* Data) {
 
 int main() {
     pthread_t ThreadID[MAX_THREAD];
-
+    
     if(!(g_DataArray = new int[ARRAY_SIZE])) {
        std::cout << "Bad Aolloc!\n";
        return -1; 
     }
-
+    
     if(pthread_mutex_init(&g_MutexLock, NULL) != 0 || pthread_cond_init(&g_ConditionalVariable, NULL)) {
         std::cout << "Failed To Initialize Mutex or Conditional Variable\n";
         return -1;
