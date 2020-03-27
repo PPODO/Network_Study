@@ -34,6 +34,15 @@
 #folder
 .vs/
 out/
+Debug/
+Release/
+/**/Debug/
+/**/Release/
+/**/x64/
+
 
 #file
 *.json
+/**/*.vcxproj
+/**/*.filters
+/**/*.user
