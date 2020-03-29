@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-static constexpr size_t not_used = -1;
+static constexpr size_t not_used = 0;
 
 typedef struct _DATA {
 public:
@@ -10,7 +10,7 @@ public:
 	int m_UniqueIndex;
 
 public:
-	_DATA() {};
+	_DATA() : m_ID(), m_UniqueIndex() {};
 	_DATA(const char* const ID, int UniqueKey) { strcpy_s(m_ID, 32, ID); m_UniqueIndex = UniqueKey; };
 
 }DATA;
@@ -18,7 +18,7 @@ public:
 class CLinearHash {
 public:
 	CLinearHash(int BucketSize) {
-		new (&m_Bucket) std::vector<DATA*>(BucketSize, nullptr);
+		new (&m_Bucket) std::vector<int>(BucketSize, not_used);
 	}
 	~CLinearHash() {
 		for (auto It : m_Bucket) {
@@ -30,13 +30,13 @@ public:
 public:
 	void Insert(const char* const Key, int UniqueIndex) {
 		auto hashValue = HashFunc(Key);
-		while (m_Bucket[hashValue] != nullptr) {
+		while (m_Bucket[hashValue] != not_used) {
 			hashValue++;
 			if (hashValue >= m_Bucket.size()) { std::cout << "Insert Failure!\n";  break; }
 		}
 
 		DATA* lpData = new DATA(Key, UniqueIndex);
-		m_Bucket[hashValue] = lpData;
+		m_Bucket[hashValue] = reinterpret_cast<int>(lpData);
 	}
 	
 	void Delete(const char* const Key) {
@@ -45,7 +45,7 @@ public:
 			auto lpData = reinterpret_cast<DATA*>(m_Bucket[hashValue]);
 			if (lpData != nullptr && strcmp(lpData->m_ID, Key) == 0) {
 				delete lpData;
-				m_Bucket[hashValue] = nullptr;
+				m_Bucket[hashValue] = not_used;
 				break;
 			}
 			hashValue++;
@@ -77,6 +77,6 @@ public:
 	}
 
 private:
-	std::vector<DATA*> m_Bucket;
+	std::vector<int> m_Bucket;
 
 };
